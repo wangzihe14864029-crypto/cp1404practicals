@@ -1,0 +1,90 @@
+"""
+CP1404 Assignment 1 - Books to Read
+Name:Zihe Wang
+Date Started:22/10/2025
+GitHub URL:https://github.com/wangzihe14864029-crypto/cp1404practicals
+"""
+
+# =============================
+# CONSTANTS
+# =============================
+BOOKS_FILE = "books.csv"
+UNREAD = "u"
+COMPLETED = "c"
+
+
+def main():
+    """Run the main program loop."""
+    print("Books to Read 1.0 by Zihe Wang")
+    books = load_books(BOOKS_FILE)
+    print(f"{len(books)} books loaded.")
+
+    menu = """Menu:
+D - Display books
+A - Add new book
+C - Complete a book
+Q - Quit"""
+    print(menu)
+    choice = input(">>> ").strip().upper()
+    while choice != "Q":
+        if choice == "D":
+            display_books(books)
+        elif choice == "A":
+            add_book(books)
+        elif choice == "C":
+            complete_book(books)
+        else:
+            print("Invalid menu choice")
+        print(menu)
+        choice = input(">>> ").strip().upper()
+
+    save_books(BOOKS_FILE, books)
+    print(f"{len(books)} books saved to {BOOKS_FILE}")
+    print('"So many books, so little time." - Frank Zappa')
+
+
+# =============================
+# FUNCTION DEFINITIONS
+# =============================
+
+def load_books(filename):
+    """Load books from the given CSV file into a list of lists."""
+    books = []
+    try:
+        with open(filename, "r", encoding="utf-8") as file:
+            for line in file:
+                parts = line.strip().split(",")
+                parts[2] = int(parts[2])  # convert page string to integer
+                books.append(parts)
+    except FileNotFoundError:
+        print("File not found. Starting with an empty book list.")
+    return books
+
+
+def save_books(filename, books):
+    """Save all books to the CSV file."""
+    with open(filename, "w", encoding="utf-8") as file:
+        for book in books:
+            file.write(f"{book[0]},{book[1]},{book[2]},{book[3]}\n")
+
+
+def display_books(books):
+    """Display all books (placeholder for now)."""
+    print("Display books feature coming soon...")
+
+
+def add_book(books):
+    """Add a new book (placeholder for now)."""
+    print("Add new book feature coming soon...")
+
+
+def complete_book(books):
+    """Mark a book as completed (placeholder for now)."""
+    print("Complete book feature coming soon...")
+
+
+# =============================
+# PROGRAM ENTRY POINT
+# =============================
+if __name__ == "__main__":
+    main()
